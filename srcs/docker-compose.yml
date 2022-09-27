@@ -1,0 +1,21 @@
+services:
+  nginx:
+    container_name: nginx
+    build: requirements/nginx
+    restart: always
+    depends_on:
+      - wordpress
+  wordpress:
+    container_name: wordpress
+    build: requirements/wordpress
+    restart: always
+    depends_on:
+      - mariadb
+  mariadb:
+    container_name: mariadb
+    build: requirements/mariadb
+    ports:
+      - "3306:3306"
+    restart: always
+
+networks:
