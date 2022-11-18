@@ -1,12 +1,41 @@
+version: "3"
+
 services:
   nginx:
-    container_name: nginx
-    build: requirements/nginx
-    restart: always
+    image: nginx:latest
     ports:
-      - "80:80"
+        - '80:80'
+    volumes:
+        - ./nginx:/etc/nginx/conf.d
+        - ./data:/var/www/html
+    depends_on:
+        - wordpress
+    restart: always
     networks:
       - net
+
+  mysql:
+    image: mariadb
+    volumes:
+      - ./db-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=aqwe123
+    restart: always
+    networks:
+      - net
+
+  wordpress:
+    image: wordpress:4.7.1-php7.0-fpm
+    volumes:
+      - ./data:/var/www/html
+    networks:
+      - net
+    environment:
+      - WORDPRESS_DB_NAME=wpdb
+      - WORDPRESS_TABLE_PREFIX=wp_
+      - WORDPRESS_DB_HOST=mysql
+      - WORDPRESS_DB_PASSWORD=aqwe123
+    restart: always
 
 networks:
   net:
