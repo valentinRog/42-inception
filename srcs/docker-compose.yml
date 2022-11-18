@@ -4,7 +4,7 @@ services:
   nginx:
     image: nginx:latest
     ports:
-        - '80:80'
+        - 80:80
     volumes:
         - ./nginx:/etc/nginx/conf.d
         - ./data:/var/www/html
@@ -16,8 +16,6 @@ services:
 
   mysql:
     image: mariadb
-    volumes:
-      - ./db-data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=aqwe123
     restart: always
