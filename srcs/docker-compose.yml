@@ -6,33 +6,51 @@ services:
     ports:
         - 80:80
     volumes:
-        - ./data:/var/www/html
+        - wp:/var/www/html
     depends_on:
         - wordpress
     restart: always
     networks:
       - net
 
-  mysql:
+  mariadb:
     image: mariadb
     environment:
-      - MYSQL_ROOT_PASSWORD=aqwe123
+      - MYSQL_ROOT_PASSWORD=123
     restart: always
     networks:
       - net
+    volumes:
+      - db:/var/lib/mysql
 
   wordpress:
     image: wordpress:4.7.1-php7.0-fpm
     volumes:
-      - ./data:/var/www/html
+      - wp:/var/www/html
     networks:
       - net
+    depends_on:
+      - mariadb
     environment:
       - WORDPRESS_DB_NAME=wpdb
       - WORDPRESS_TABLE_PREFIX=wp_
-      - WORDPRESS_DB_HOST=mysql
-      - WORDPRESS_DB_PASSWORD=aqwe123
+      - WORDPRESS_DB_HOST=mariadb
+      - WORDPRESS_DB_PASSWORD=123
     restart: always
+
+volumes:
+  wp:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/vrogiste/data/wp
+  db:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/vrogiste/data/db
 
 networks:
   net:
