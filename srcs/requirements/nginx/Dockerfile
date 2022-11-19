@@ -1,10 +1,8 @@
-FROM alpine
+FROM debian:buster
 
-COPY wordpress.conf /etc/nginx/conf.d
+RUN apt-get update
+RUN apt-get install -y nginx
 
-RUN apk update &&\
-    apk upgrade &&\
-    apk add\
-      nginx
+COPY default /etc/nginx/sites-enabled/default
 
-CMD nginx -g 'daemon off;'
+CMD ["nginx", "-g", "daemon off;"]
