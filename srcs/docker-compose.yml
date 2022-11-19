@@ -24,13 +24,15 @@ services:
       - db:/var/lib/mysql
 
   wordpress:
-    image: wordpress:4.7.1-php7.0-fpm
+    build: requirements/wordpress
     volumes:
       - wp:/var/www/html
     networks:
       - net
     depends_on:
       - mariadb
+    env_file:
+      - .env
     environment:
       - WORDPRESS_DB_NAME=wpdb
       - WORDPRESS_TABLE_PREFIX=wp_
