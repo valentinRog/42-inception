@@ -1,13 +1,14 @@
-FROM alpine
+FROM alpine:3.13
 
-RUN apk update\
-        && apk upgrade\
-        && apk add\
-          mariadb\
-          mariadb-client
+ENV WP_DATABASE_NAME=wpdb
+ENV WP_DATABASE_USR=wpuser
+ENV WP_DATABASE_PWD=123
+ENV MYSQL_ROOT_PASSWORD=123
 
-RUN mysql_install_db --basedir=/usr --datadir=/var/lib/mysql --rpm
+RUN	apk update && apk upgrade && apk add --no-cache \
+        mariadb \
+        mariadb-client
+        
+COPY tools/configure.sh /tmp/configure.sh
 
-EXPOSE 3306
-
-ENTRYPOINT mysql -p123 -e "create database wpdb" ; mysqld
+ENTRYPOINT ["sh", "/tmp/configure.sh"]
