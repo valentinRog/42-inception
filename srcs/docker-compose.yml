@@ -15,9 +15,8 @@ services:
 
   mariadb:
     build: requirements/mariadb
-    environment:
-      - MYSQL_ROOT_PASSWORD=123
-      - DB_NAME=wpdb
+    env_file:
+      - .env
     restart: always
     networks:
       - net
