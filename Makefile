@@ -1,8 +1,8 @@
 SRC_DIR = srcs
 
 all:
-	mkdir -p ~/data/wp
-	mkdir -p ~/data/db
+	mkdir -p ./data/wp
+	mkdir -p ./data/db
 	docker-compose --project-directory $(SRC_DIR) up -d
 
 clean:
@@ -10,6 +10,6 @@ clean:
 
 fclean: clean
 	docker system prune -fa --volumes
-	$(RM) -r ~/data
+	$(RM) -r ./data
 
 re: fclean all
