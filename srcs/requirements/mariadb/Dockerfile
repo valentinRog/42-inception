@@ -1,11 +1,11 @@
-FROM alpine
+FROM debian:bullseye
 
-RUN     apk update\
-        && apk upgrade\
-        && apk add\
-            mariadb \
-            mariadb-client
-        
-COPY tools/configure.sh /tmp/configure.sh
+RUN     apt update\
+        && apt upgrade -y\
+        && apt install -y\
+            mariadb-server\
+            gettext
 
-ENTRYPOINT sh /tmp/configure.sh
+ADD tools /tools
+
+ENTRYPOINT sh /tools/entrypoint.sh
