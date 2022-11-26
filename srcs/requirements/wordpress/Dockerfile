@@ -1,6 +1,13 @@
 FROM debian:bullseye
 
-RUN	apt update && apt upgrade -y && apt install -y php php-mysqli php-fpm wget sendmail mariadb-client
+RUN	apt update\
+    && apt upgrade -y\
+    && apt install -y\
+    wget\
+    mariadb-client\
+    php7.4\
+    php7.4-mysqli\
+    php7.4-fpm
 
 COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d
 
@@ -10,6 +17,6 @@ RUN cp wp-cli.phar /usr/bin/wp
 
 WORKDIR /var/www/html/wordpress
 
-COPY tools/configure.sh /tmp/configure.sh
+ADD tools /tools
 
-ENTRYPOINT [ "sh", "/tmp/configure.sh" ]
+ENTRYPOINT sh /tools/entrypoint.sh
