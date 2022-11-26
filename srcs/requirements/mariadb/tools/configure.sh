@@ -11,12 +11,7 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
 
 	mysql_install_db --basedir=/usr --datadir=/var/lib/mysql --user=mysql --rpm > /dev/null
 
-	init_sql=`mktemp`
-	if [ ! -f "$init_sql" ]; then
-		return 1
-	fi
-
-	cat << EOF > $init_sql
+	cat << EOF > init.sql
 USE mysql;
 FLUSH PRIVILEGES;
 DELETE FROM	mysql.user WHERE User='';
@@ -29,8 +24,7 @@ CREATE USER '$WORDPRESS_DB_USER'@'%' IDENTIFIED by '$WORDPRESS_DB_PASSWORD';
 GRANT ALL PRIVILEGES ON $WORDPRESS_DB_NAME.* TO '$WORDPRESS_DB_USER'@'%';
 FLUSH PRIVILEGES;
 EOF
-	/usr/bin/mysqld --user=mysql --bootstrap < $init_sql
-	rm -f $init_sql
+	/usr/bin/mysqld --user=mysql --bootstrap < init.sql
 fi
 
 sed -i "s|skip-networking|# skip-networking|g" /etc/my.cnf.d/mariadb-server.cnf
