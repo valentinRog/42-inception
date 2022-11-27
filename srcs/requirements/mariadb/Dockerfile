@@ -11,4 +11,4 @@ ADD tools /tools
 RUN sh /tools/configure.sh
 
 ENTRYPOINT ["/bin/sh", "/tools/entrypoint.sh"]
-CMD ["/usr/sbin/mysqld", "--bind-address 0.0.0.0", "--init-file /tools/out.sql"]
+CMD ["mysqld", "--bind-address 0.0.0.0", "--init-file /tools/out.sql"]
