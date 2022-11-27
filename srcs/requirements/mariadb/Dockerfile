@@ -8,4 +8,7 @@ RUN     apt update\
 
 ADD tools /tools
 
-ENTRYPOINT sh /tools/entrypoint.sh
+RUN sh /tools/configure.sh
+
+ENTRYPOINT ["/bin/sh", "/tools/entrypoint.sh"]
+CMD ["/usr/sbin/mysqld", "--bind-address 0.0.0.0", "--init-file /tools/out.sql"]
