@@ -47,7 +47,7 @@ services:
       - 5000:5000
 
   redis:
-    image: redis
+    build: requirements/bonus/redis
     networks:
       - net
     env_file:

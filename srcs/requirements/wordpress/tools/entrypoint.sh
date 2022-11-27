@@ -5,12 +5,16 @@ if [ ! -f wp-config.php ]; then
     wp core install --url=localhost --title=yo --admin_user=root --admin_password=$WORDPRESS_DB_PASSWORD --admin_email=vfdsafsfahfkl@student.s19.be --skip-email --allow-root
     wp user create vrogiste vrogiste@student.s19.be --role=author --user_pass=$WORDPRESS_DB_PASSWORD --allow-root
 
-    sed -i wp-config.php "40i define( 'WP_REDIS_HOST', 'redis' );"
-    sed -i wp-config.php "41i define( 'WP_REDIS_PORT', 6379 );"
-    sed -i wp-config.php "42i define( 'WP_REDIS_TIMEOUT', 1 );"
-    sed -i wp-config.php "43i define( 'WP_REDIS_READ_TIMEOUT', 1 );"
-    sed -i wp-config.php "44i define( 'WP_REDIS_DATABASE', 0 );\n"
+    sed -i "40i define( 'WP_REDIS_HOST', 'redis' );" wp-config.php  
+    sed -i "41i define( 'WP_REDIS_PORT', 6379 );" wp-config.php 
+    sed -i "42i define( 'WP_REDIS_TIMEOUT', 1 );" wp-config.php 
+    sed -i "43i define( 'WP_REDIS_READ_TIMEOUT', 1 );" wp-config.php 
+    sed -i "44i define( 'WP_REDIS_DATABASE', 0 );\n" wp-config.php 
     wp plugin install redis-cache --activate --allow-root
     wp plugin update --all --allow-root
+    wp plugin activate redis-cache --allow-root
 fi
+
+wp redis enable --force --allow-root
+
 exec $@
