@@ -2,7 +2,7 @@ SRC_DIR = srcs
 
 all:
 	mkdir -p /home/vrogiste/data/wp
-	mkdir -p /home/vrogiste/data/wp
+	mkdir -p /home/vrogiste/data/db
 	docker-compose --project-directory $(SRC_DIR) up --build  -d
 
 clean:
