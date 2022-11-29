@@ -56,7 +56,7 @@ services:
     restart: always
 
   ftp:
-    image: delfer/alpine-ftp-server
+    build: requirements/bonus/ftp
     networks:
       - net
     env_file:
