@@ -9,10 +9,18 @@ if [ ! -f wp-config.php ]; then
     sed -i "41i define( 'WP_REDIS_PORT', 6379 );" wp-config.php 
     sed -i "42i define( 'WP_REDIS_TIMEOUT', 1 );" wp-config.php 
     sed -i "43i define( 'WP_REDIS_READ_TIMEOUT', 1 );" wp-config.php 
-    sed -i "44i define( 'WP_REDIS_DATABASE', 0 );\n" wp-config.php 
+    sed -i "44i define( 'WP_REDIS_DATABASE', 0 );" wp-config.php 
+
+    sed -i "45i define( 'FTP_USER', 'ftpuser' );" wp-config.php 
+    sed -i "46i define( 'FTP_PASS', 'Born2beroot' );" wp-config.php 
+    sed -i "47i define( 'FTP_HOST', 'ftp' );" wp-config.php 
+
+    sed -i "48i define( 'WP_CACHE', false )\n;" wp-config.php 
     wp plugin install redis-cache --activate --allow-root
     wp plugin update --all --allow-root
     wp plugin activate redis-cache --allow-root
+
+    chmod -R 777 .
 fi
 
 wp redis enable --force --allow-root
