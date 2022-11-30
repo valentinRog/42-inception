@@ -3,6 +3,7 @@ version: "3"
 services:
   nginx:
     build: requirements/nginx
+    image: nginx
     ports:
         - 443:443
     volumes:
@@ -15,6 +16,7 @@ services:
 
   mariadb:
     build: requirements/mariadb
+    image: mariadb
     env_file:
       - .env
     restart: always
@@ -25,6 +27,7 @@ services:
 
   wordpress:
     build: requirements/wordpress
+    image: wordpress
     volumes:
       - wp:/var/www/html
     networks:
@@ -39,6 +42,7 @@ services:
   
   adminer:
     build: requirements/bonus/adminer
+    image: adminer
     networks:
       - net
     depends_on:
@@ -49,6 +53,7 @@ services:
 
   redis:
     build: requirements/bonus/redis
+    image: redis
     networks:
       - net
     env_file:
@@ -57,6 +62,7 @@ services:
 
   ftp:
     build: requirements/bonus/ftp
+    image: ftp
     networks:
       - net
     env_file:
@@ -70,15 +76,19 @@ services:
 
   portainer:
     build: requirements/bonus/portainer/
+    image: portainer
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     restart: always
-    depends_on:
-      - wordpress
-    networks:
-      - net
     ports:
       - "9443:9443"
+
+  website:
+    build: requirements/bonus/website
+    image: website
+    restart: always
+    ports:
+      - 8000:8000
 
 volumes:
   wp:

@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/bin/sh -e
 
 if [ ! -f wp-config.php ]; then
     wp config create --dbname=$WORDPRESS_DB_NAME --dbuser=$WORDPRESS_DB_USER --dbpass=$WORDPRESS_DB_PASSWORD --dbhost=$WORDPRESS_DB_HOST --dbcharset="utf8" --dbcollate="utf8_general_ci" --allow-root
-    wp core install --url=localhost --title=yo --admin_user=root --admin_password=$WORDPRESS_DB_PASSWORD --admin_email=vfdsafsfahfkl@student.s19.be --skip-email --allow-root
+    wp core install --url=$DOMAIN --title=yo --admin_user=root --admin_password=$WORDPRESS_DB_PASSWORD --admin_email=vfdsafsfahfkl@student.s19.be --skip-email --allow-root
     wp user create vrogiste vrogiste@student.s19.be --role=author --user_pass=$WORDPRESS_DB_PASSWORD --allow-root
 
     sed -i "40i define( 'WP_REDIS_HOST', 'redis' );" wp-config.php  
@@ -17,10 +17,10 @@ if [ ! -f wp-config.php ]; then
 
     sed -i "48i define( 'WP_CACHE', false )\n;" wp-config.php 
     wp plugin install redis-cache --activate --allow-root
+    wp theme install teluro --activate --allow-root
     wp plugin update --all --allow-root
     wp plugin activate redis-cache --allow-root
 
-    chmod -R 777 .
     chown -R www-data:www-data .
 fi
 
