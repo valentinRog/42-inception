@@ -68,6 +68,18 @@ services:
     volumes:
         - wp:/var/www/html
 
+  portainer:
+    build: requirements/bonus/portainer/
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    restart: always
+    depends_on:
+      - wordpress
+    networks:
+      - net
+    ports:
+      - "9443:9443"
+
 volumes:
   wp:
     driver: local
