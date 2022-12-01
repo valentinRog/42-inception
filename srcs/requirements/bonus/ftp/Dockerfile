@@ -1,8 +1,8 @@
 FROM debian:bullseye
 
-RUN apt update\
-    && apt upgrade -y\
-    && apt install -y vsftpd
+RUN apt-get update\
+    && apt-get upgrade -y\
+    && apt-get install -y vsftpd
 
 ADD tools /tools
 

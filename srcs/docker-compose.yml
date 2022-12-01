@@ -4,6 +4,7 @@ services:
   nginx:
     build: requirements/nginx
     image: nginx
+    container_name: nginx
     ports:
         - 443:443
     volumes:
@@ -17,6 +18,7 @@ services:
   mariadb:
     build: requirements/mariadb
     image: mariadb
+    container_name: mariadb
     env_file:
       - .env
     restart: always
@@ -28,6 +30,7 @@ services:
   wordpress:
     build: requirements/wordpress
     image: wordpress
+    container_name: wordpress
     volumes:
       - wp:/var/www/html
     networks:
@@ -43,6 +46,7 @@ services:
   adminer:
     build: requirements/bonus/adminer
     image: adminer
+    container_name: adminer
     networks:
       - net
     depends_on:
@@ -54,6 +58,7 @@ services:
   redis:
     build: requirements/bonus/redis
     image: redis
+    container_name: redis
     networks:
       - net
     env_file:
@@ -63,13 +68,14 @@ services:
   ftp:
     build: requirements/bonus/ftp
     image: ftp
+    container_name: ftp
     networks:
       - net
     env_file:
       - .env
     restart: always
     ports:
-      - 21:21
+      - "21:21"
       - 21000-21010:21000-21010
     volumes:
         - wp:/var/www/html
@@ -77,27 +83,31 @@ services:
   portainer:
     build: requirements/bonus/portainer/
     image: portainer
+    container_name: portainer
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     restart: always
     ports:
-      - "9443:9443"
+      - 9443:9443
 
   website:
     build: requirements/bonus/website
     image: website
+    container_name: website
     restart: always
     ports:
-      - 8000:8000
+      - 80:80
 
 volumes:
   wp:
+    name: wp
     driver: local
     driver_opts:
       type: none
       o: bind
       device: /home/vrogiste/data/wp
   db:
+    name: db
     driver: local
     driver_opts:
       type: none
@@ -106,3 +116,4 @@ volumes:
 
 networks:
   net:
+    name: net
