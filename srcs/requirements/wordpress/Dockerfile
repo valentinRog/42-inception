@@ -21,5 +21,5 @@ ADD tools /tools
 
 RUN sh /tools/configure.sh
 
-ENTRYPOINT ["/bin/sh", "/tools/entrypoint.sh"]
-CMD ["php-fpm7.4", "-F", "-R"]
+ENTRYPOINT [ "/bin/sh", "/tools/entrypoint.sh" ]
+CMD [ "php-fpm7.4", "--allow-to-run-as-root", "--nodaemonize" ]
