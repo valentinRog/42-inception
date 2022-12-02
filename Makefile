@@ -17,5 +17,5 @@ down:
 
 re: down build
 
-fclean:
-	sh clean.sh
+prune:
+	sh prune.sh
