@@ -6,7 +6,7 @@ RUN apt-get update\
     nginx\
     openssl
 
-COPY conf/default /etc/nginx/sites-enabled/default
+COPY conf/nginx.conf /etc/nginx/sites-enabled/default
 
 ADD tools /tools
 RUN sh /tools/configure.sh

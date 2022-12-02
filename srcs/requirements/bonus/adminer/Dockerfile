@@ -13,4 +13,4 @@ WORKDIR /var/www/html
 ADD tools /tools
 RUN sh /tools/configure.sh
 
-CMD ["php", "-S", "0.0.0.0:5000"]
+CMD ["php", "-S", "0.0.0.0:9000" ]
