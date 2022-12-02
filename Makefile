@@ -1,16 +1,21 @@
 SRC_DIR = srcs
 
-all:
+all: up
+
+dir:
 	mkdir -p /home/vrogiste/data/wp
 	mkdir -p /home/vrogiste/data/db
-	docker-compose --project-directory $(SRC_DIR) up --build  -d
 
-clean:
+up: dir
+	docker-compose --project-directory $(SRC_DIR) up -d
+
+build: dir
+	docker-compose --project-directory $(SRC_DIR) up -d --build
+
+down:
 	docker-compose --project-directory $(SRC_DIR) down
 
-fclean: clean
-	# docker system prune -f --volumes
-	$(RM) -r /home/vrogiste/data
-	./clean-volumes.sh
+re: down build
 
-re: fclean all
+fclean:
+	sh clean.sh
