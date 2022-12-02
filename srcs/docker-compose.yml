@@ -98,7 +98,7 @@ services:
     container_name: website
     restart: always
     ports:
-      - 80:80
+      - 8000:8000
 
 volumes:
   wp:
