@@ -1,3 +1,4 @@
+NAME = inception
 SRC_DIR = srcs
 
 all: up
@@ -7,10 +8,10 @@ dir:
 	mkdir -p /home/vrogiste/data/db
 
 up: dir
-	docker-compose --project-directory $(SRC_DIR) up -d
+	docker-compose -p $(NAME) --project-directory $(SRC_DIR) up -d
 
 build: dir
-	docker-compose --project-directory $(SRC_DIR) up -d --build
+	docker-compose -p $(NAME) --project-directory $(SRC_DIR) up -d --build
 
 down:
 	docker-compose --project-directory $(SRC_DIR) down
