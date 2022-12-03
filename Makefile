@@ -14,9 +14,9 @@ build: dir
 	docker-compose -p $(NAME) --project-directory $(SRC_DIR) up -d --build
 
 down:
-	docker-compose --project-directory $(SRC_DIR) down
+	docker-compose -p $(NAME) --project-directory $(SRC_DIR) down
 
 re: down build
 
 prune:
-	sh prune.sh
+	./prune.sh

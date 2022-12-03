@@ -1,0 +1,94 @@
+body {
+  margin: 0;
+  text-align: center;
+  background-color: #282a36;
+  color: white;
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  font-size: 5rem;
+}
+
+div.container {
+  background-color: #21222c;
+  border-radius: 0.4rem;
+  padding: 2rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: x-large;
+}
+
+#links {
+  display: inline-block;
+}
+
+#links a {
+  display: block;
+  border-radius: 0.3rem;
+  text-decoration: none;
+  padding: 0.2rem 1.5rem;
+}
+
+#links a:link,
+#links a:visited {
+  color: inherit;
+}
+
+#links a:hover {
+  background-color: #ff79c6;
+}
+
+#logos {
+  margin-top: 2rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+#logos > div {
+  border: 0.2rem solid transparent;
+  border-radius: 0.4rem;
+}
+
+#logos > div:hover {
+  border-color: white;
+}
+
+#logos img {
+  height: 4rem;
+  margin: 0 0.2rem;
+  padding: 0.4rem;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #21222c;
+  font-size: large;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+footer a {
+  display: flex;
+  flex-direction: column;
+}
+
+footer img {
+  height: 3rem;
+  margin: 0.2rem 0;
+  border: 0.12rem solid transparent;
+  border-radius: 0.3rem;
+}
+
+footer img:hover {
+  border-color: white;
+}

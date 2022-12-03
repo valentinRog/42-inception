@@ -3,19 +3,87 @@
   <head>
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
+      href="{{ url_for('static', filename='css/style.css') }}"
       type="text/css"
     />
   </head>
   <body>
     <h1>Inception</h1>
-    <div class="container">
-      <ul>
-        <li><a href="https://localhost">Wordpress</a></li>
-        <li><a href="https://localhost/wp-admin">Dashboard</a></li>
-        <li><a href="http://localhost:9000">Adminer</a></li>
-        <li><a href="https://localhost:9443">Portainer</a></li>
-      </ul>
+    <div>
+      <div class="container" id="links">
+        <ul>
+          <a href="https://localhost"><li>Wordpress</li></a>
+          <a href="https://localhost/wp-admin"><li>Dashboard</li></a>
+          <a href="http://localhost:9000"><li>Adminer</li></a>
+          <a href="https://localhost:9443"><li>Portainer</li></a>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="container" id="logos">
+        <div>
+          <a href="https://www.adminer.org/"
+            ><img
+              type="svg"
+              src="{{ url_for('static', filename='img/adminer.svg') }}"
+          /></a>
+        </div>
+        <div>
+          <a href="https://www.docker.com/"
+            ><img
+              type="svg"
+              src="{{ url_for('static', filename='img/docker.svg') }}"
+          /></a>
+        </div>
+        <div>
+          <a href="https://mariadb.org/"
+            ><img
+              type="svg"
+              src="{{ url_for('static', filename='img/mariadb.svg') }}"
+          /></a>
+        </div>
+        <div>
+          <a href="https://www.nginx.com/"
+            ><img
+              type="svg"
+              src="{{ url_for('static', filename='img/nginx.svg') }}"
+          /></a>
+        </div>
+        <div>
+          <a href="https://www.portainer.io/"
+            ><img
+              type="svg"
+              src="{{ url_for('static', filename='img/portainer.svg') }}"
+          /></a>
+        </div>
+        <div>
+          <a href="https://www.python.org/"
+            ><img
+              type="svg"
+              src="{{ url_for('static', filename='img/python.svg') }}"
+          /></a>
+        </div>
+        <div>
+          <a href="https://redis.io/"
+            ><img
+              type="svg"
+              src="{{ url_for('static', filename='img/redis.svg') }}"
+          /></a>
+        </div>
+        <div>
+          <a href="https://wordpress.com/"
+            ><img
+              type="svg"
+              src="{{ url_for('static', filename='img/wordpress.svg') }}"
+          /></a>
+        </div>
+      </div>
     </div>
   </body>
+  <footer>
+    <span>Valentin Rogister</span>
+    <a href="https:/github.com/valentinrog"
+      ><img type="svg" src="{{ url_for('static', filename='img/github.svg') }}"
+    /></a>
+  </footer>
 </html>
