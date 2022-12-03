@@ -46,6 +46,7 @@ ul {
 #logos {
   margin-top: 2rem;
   display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
 }
 
