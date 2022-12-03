@@ -1,7 +1,11 @@
 FROM debian:buster
 
-RUN apt-get update && apt-get upgrade -y && apt-get install -y redis-server;
+RUN apt-get update\
+    && apt-get upgrade -y\
+    && apt-get install -y\
+    redis-server\
+    && rm -rf /var/lib/apt/lists/*
 
-ADD redis.conf /etc/redis.conf
+COPY conf/redis.conf /etc/
 
-CMD [ "redis-server", "/etc/redis.conf"]
+CMD [ "redis-server", "/etc/redis.conf" ]

@@ -3,11 +3,14 @@ FROM debian:buster
 RUN apt-get update\
     && apt-get upgrade -y\
     && apt-get install -y\
-    curl\
-    tar
+    tar\
+    && rm -rf /var/lib/apt/lists/*
 
-ADD tools /tools
-RUN sh /tools/configure.sh
+WORKDIR /portainer
 
-ENTRYPOINT [ "sh", "/tools/entrypoint.sh" ]
-CMD [ "/usr/local/portainer/portainer", "--admin-password-file", "/password" ]
+ADD https://github.com/portainer/portainer/releases/download/2.16.2/portainer-2.16.2-linux-amd64.tar.gz /portainer/
+RUN tar -xf /portainer/portainer-2.16.2-linux-amd64.tar.gz
+
+COPY tools/entrypoint.sh /tools/
+ENTRYPOINT [ "/tools/entrypoint.sh" ]
+CMD [ "portainer/portainer", "--admin-password-file", "password" ]

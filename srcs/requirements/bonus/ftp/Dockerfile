@@ -2,11 +2,12 @@ FROM debian:buster
 
 RUN apt-get update\
     && apt-get upgrade -y\
-    && apt-get install -y vsftpd
+    && apt-get install -y vsftpd\
+    && rm -rf /var/lib/apt/lists/*
 
-ADD tools /tools
+COPY tools/configure.sh /tools/
+RUN /tools/configure.sh
 
-RUN sh /tools/configure.sh
-
+COPY tools/entrypoint.sh /tools/
 ENTRYPOINT [ "sh", "/tools/entrypoint.sh" ]
-CMD ["vsftpd"]
+CMD [ "vsftpd" ]

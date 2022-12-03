@@ -1,14 +1,16 @@
 FROM debian:buster
 
-RUN     apt-get update\
-        && apt-get upgrade -y\
-        && apt-get install -y\
-            mariadb-server\
-            gettext
+RUN apt-get update\
+    && apt-get upgrade -y\
+    && apt-get install -y\
+    mariadb-server\
+    gettext\
+    && rm -rf /var/lib/apt/lists/*
 
-ADD tools /tools
+COPY tools/configure.sh /tools/
+RUN /tools/configure.sh
 
-RUN sh /tools/configure.sh
-
-ENTRYPOINT ["/bin/sh", "/tools/entrypoint.sh"]
-CMD ["mysqld", "--bind-address 0.0.0.0", "--init-file /tools/out.sql"]
+COPY tools/entrypoint.sh /tools/
+COPY tools/init.sql /tools/
+ENTRYPOINT [ "/tools/entrypoint.sh" ]
+CMD [ "mysqld", "--bind-address 0.0.0.0", "--init-file /tools/out.sql" ]

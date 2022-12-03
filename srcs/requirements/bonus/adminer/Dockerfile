@@ -6,11 +6,12 @@ RUN	apt-get update\
     wget\
     mariadb-client\
     php7.3\
-    php7.3-mysqlnd
+    php7.3-mysqlnd\
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /var/www/html
 
-ADD tools /tools
-RUN sh /tools/configure.sh
+COPY tools/configure.sh /tools/
+RUN /tools/configure.sh
 
-CMD ["php", "-S", "0.0.0.0:9000" ]
+CMD [ "php", "-S", "0.0.0.0:9000" ]
