@@ -1,4 +1,4 @@
 #!/bin/sh
 
-envsubst < /tools/init.sql > /tools/out.sql
+envsubst < /tools/init.sql | sponge /tools/init.sql
 exec $@

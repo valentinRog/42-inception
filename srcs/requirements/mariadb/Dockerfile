@@ -5,12 +5,13 @@ RUN apt-get update\
     && apt-get install -y\
     mariadb-server\
     gettext\
+    moreutils\
     && rm -rf /var/lib/apt/lists/*
 
 COPY tools/configure.sh /tools/
 RUN /tools/configure.sh
 
-COPY tools/entrypoint.sh /tools/
 COPY tools/init.sql /tools/
+COPY tools/entrypoint.sh /tools/
 ENTRYPOINT [ "/tools/entrypoint.sh" ]
-CMD [ "mysqld", "--bind-address 0.0.0.0", "--init-file /tools/out.sql" ]
+CMD [ "mysqld", "--bind-address 0.0.0.0", "--init-file /tools/init.sql" ]

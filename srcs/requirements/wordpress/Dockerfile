@@ -12,6 +12,7 @@ RUN	apt-get update\
     php7.3-gd\
     php7.3-memcached\
     php7.3-redis\
+    gettext\
     && rm -rf /var/lib/apt/lists/*
 
 COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d
@@ -22,6 +23,7 @@ ADD https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar /v
 COPY tools/configure.sh /tools/
 RUN /tools/configure.sh
 
+COPY tools/extra-wp-config.php /tools/
 COPY tools/entrypoint.sh /tools/
 ENTRYPOINT [ "/tools/entrypoint.sh" ]
 CMD [ "php-fpm7.3", "--allow-to-run-as-root", "--nodaemonize" ]
