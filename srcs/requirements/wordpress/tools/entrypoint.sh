@@ -9,7 +9,7 @@ if [ ! -f wp-config.php ]; then
         --dbhost=mariadb\
         --allow-root\
         --extra-php
-    wp core install
+    wp core install\
         --url=$DOMAIN\
         --title=$WP_TITLE\
         --admin_user=$WP_ADMIN\
