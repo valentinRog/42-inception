@@ -22,11 +22,12 @@ if [ ! -f wp-config.php ]; then
         --role=author\
         --user_pass=$WP_USER_PASSWORD\
         --allow-root
+    wp theme install teluro --activate --allow-root
     wp plugin install redis-cache --activate --allow-root
     wp plugin update --all --allow-root
     wp plugin activate redis-cache --allow-root
-    chown -R www-data:www-data .
-    chmod -R 777 .
 fi
+chown -R www-data:www-data .
+chmod -R 777 .
 wp redis enable --force --allow-root
 exec $@

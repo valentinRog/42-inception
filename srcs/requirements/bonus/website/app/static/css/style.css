@@ -4,10 +4,17 @@ body {
   background-color: #282a36;
   color: white;
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  margin-bottom: 6rem;
 }
 
 h1 {
   font-size: 5rem;
+}
+
+h2 {
+  font-size: xx-large;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 div.container {
@@ -44,10 +51,11 @@ ul {
 }
 
 #logos {
-  margin-top: 2rem;
+  margin-top: 0.8rem;
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
+  max-width: 85%;
 }
 
 #logos > div {
